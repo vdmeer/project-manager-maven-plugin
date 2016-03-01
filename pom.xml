@@ -1,0 +1,244 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.vandermeer</groupId>
+	<artifactId>project-manager-maven-plugin</artifactId>
+	<version>0.0.1</version>
+	<packaging>maven-plugin</packaging>
+
+	<name>Maven Plugin - Project Manager</name>
+	<url>https://github.com/vdmeer/asciiparagraph</url>
+	<description>A maven plugin to manage maven projects, for instance for a parent project. Does coordinate dependencies, create POM files, set version information in sources.</description>
+	<inceptionYear>2016</inceptionYear>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.resources.sourceEncoding>UTF-8</project.resources.sourceEncoding>
+		<encoding>UTF-8</encoding>
+		<file.encoding>UTF-8</file.encoding>
+	</properties>
+
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>
+
+	<distributionManagement>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>SKB Repository</name>
+			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>SKB Repository</name>
+			<url>http://oss.sonatype.org/content/repositories/skb-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<scm>
+		<developerConnection>scm:git:git@github.com:vdmeer/project-manager-maven-plugin.git</developerConnection>
+		<connection>scm:git:git://github.com/vdmeer/project-manager-maven-plugin.git</connection>
+		<tag>project-manager-maven-plugin-0.0.1</tag>
+		<url>https://github.com/vdmeer/project-manager-maven-plugin</url>
+	</scm>
+
+	<issueManagement>
+		<url>https://github.com/vdmeer/project-manager-maven-plugin/issues</url>
+		<system>github</system>
+	</issueManagement>
+
+	<developers>
+		<developer>
+			<id>vdmeer.sven</id>
+			<name>Sven van der Meer</name>
+			<email>vdmeer.sven@mykolab.com</email>
+				<url>http://www.vandermeer.de</url>
+<!--
+				<organization>ACME</organization>
+				<organizationUrl>http://www.example.com</organizationUrl>
+-->
+				<roles>
+					<role>creator</role>
+					<role>developer</role>
+				</roles>
+				<timezone>Europe/Dublin</timezone>
+<!--
+				<properties>
+					<picUrl>http://www.example.com/jdoe/pic</picUrl>
+				</properties>
+-->
+		</developer>
+	</developers>
+
+	<contributors>
+	</contributors>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>3.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+			<version>3.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>ST4</artifactId>
+			<version>4.0.8</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<!-- see http://jira.codehaus.org/browse/MNG-5346 -->
+					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+				</configuration>
+				<executions>
+					<execution>
+						<id>mojo-descriptor</id>
+						<goals>
+							<goal>descriptor</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>help-goal</id>
+						<goals>
+							<goal>helpmojo</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Copy Changelog/Readme and then include in jar with License -->
+
+<!--
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>1.5.3</version>
+				<executions>
+					<execution>
+						<id>bundle-asciidoc</id>
+						<phase>process-resources</phase>
+						<configuration>
+							<sourceDirectory>src/bundle/doc</sourceDirectory>
+							<outputDirectory>./</outputDirectory>
+							<backend>html</backend>
+							<attributes>
+								<toc>true</toc>
+							</attributes>
+						</configuration>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+-->
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<id>copy-bundle-docs</id>
+						<phase>generate-resources</phase>
+						<goals><goal>copy-resources</goal></goals>
+						<configuration>
+							<outputDirectory>./</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/bundle/doc</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-to-jar</id>
+						<phase>prepare-package</phase>
+						<goals><goal>copy-resources</goal></goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}</directory>
+									<includes>
+										<include>LICENSE</include>
+										<include>CHANGELOG*</include>
+										<include>README*</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.3</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<quiet>true</quiet>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.3</version>
+			</plugin>
+		</plugins>
+	</reporting>
+
+</project>

@@ -1,0 +1,4 @@
+
+v0.0.1 - initial release - 2016-##-##
+-------------------------------------
+* initial release based on older versions using shell scripts (they are in the GitHub repo in src/main/bash)

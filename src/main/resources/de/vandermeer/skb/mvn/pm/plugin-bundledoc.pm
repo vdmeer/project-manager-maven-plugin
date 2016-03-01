@@ -1,0 +1,23 @@
+<!-- Copy Changelog/Readme and then include in jar with License -->
+<plugin>
+    <groupId>org.asciidoctor</groupId>
+    <artifactId>asciidoctor-maven-plugin</artifactId>
+    <version>1.5.3</version>
+    <executions>
+        <execution>
+            <id>bundle-asciidoc</id>
+            <phase>process-resources</phase>
+            <configuration>
+                <sourceDirectory>src/bundle/doc</sourceDirectory>
+                <outputDirectory>./</outputDirectory>
+                <backend>html</backend>
+                <attributes>
+                    <toc>true</toc>
+                </attributes>
+            </configuration>
+            <goals>
+                <goal>process-asciidoc</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
