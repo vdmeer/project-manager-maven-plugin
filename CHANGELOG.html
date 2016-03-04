@@ -431,7 +431,53 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_v0_0_2_initial_release_2016_mark_mark">v0.0.2 - initial release - 2016-<mark>-</mark></h2>
 <div class="sectionbody">
-
+<div class="ulist">
+<ul>
+<li>
+<p>fixed error in pom.stg, now all definitions are in the project</p>
+</li>
+<li>
+<p>add pm.profiles property</p>
+</li>
+<li>
+<p>moved the auto-includes for bundle-doc, source jar, and javadoc jar into profiles</p>
+<div class="ulist">
+<ul>
+<li>
+<p>both bundle doc plugins are in the profile env-bundledoc</p>
+<div class="ulist">
+<ul>
+<li>
+<p>call mvn -Penv-bundledoc</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>source jar in profile env-srcjar</p>
+<div class="ulist">
+<ul>
+<li>
+<p>call mvn -Penv-srcjar</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>javadoc jar in the profile env-jdjar</p>
+<div class="ulist">
+<ul>
+<li>
+<p>call mvn -Penv-jdjar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -449,7 +495,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-03-01 02:11:25 GMT
+Last updated 2016-03-03 08:51:54 GMT
 </div>
 </div>
 </body>

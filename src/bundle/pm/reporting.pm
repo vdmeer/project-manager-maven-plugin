@@ -1,0 +1,20 @@
+<plugins>
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-plugin-plugin</artifactId>
+		<version>3.3</version>
+	</plugin>
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-javadoc-plugin</artifactId>
+		<version>2.9</version>
+		<configuration>
+			<quiet>true</quiet>
+		</configuration>
+	</plugin>
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-jxr-plugin</artifactId>
+		<version>2.3</version>
+	</plugin>
+</plugins>
