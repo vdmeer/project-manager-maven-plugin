@@ -38,7 +38,7 @@ import de.vandermeer.skb.mvn.ProjectProperties;
  * Managed project object for the model.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.1 build 160301 (01-Mar-16) for Java 1.8
+ * @version    v0.0.2-SNAPSHOT build 160304 (04-Mar-16) for Java 1.8
  * @since      v0.0.1
  */
 public class Model_ManagedProject {
@@ -75,6 +75,9 @@ public class Model_ManagedProject {
 
 	/** Plugin definitions files of the project. */
 	protected final Set<File> plugins;
+
+	/** Profile definitions files of the project. */
+	protected final Set<File> profiles;
 
 	/**
 	 * Creates a new Managed Project object.
@@ -141,6 +144,20 @@ public class Model_ManagedProject {
 				}
 			}
 		}
+
+		//get all profiles requires
+		this.profiles = new LinkedHashSet<>();
+		if(this.properties.getProperty(ProjectProperties.PM_PROFILES.getPropName())!=null){
+			for(String fn : StringUtils.split(this.properties.getProperty(ProjectProperties.PM_PROFILES.getPropName()))){
+				File f = new File(this.pmDir + File.separator + fn);
+				if(f.exists() && f.canRead()){
+					this.profiles.add(f);
+				}
+				else{
+					throw new IllegalArgumentException("project <" + this.pmId + "> required profile file <" + f +">");
+				}
+			}
+		}
 	}
 
 	/**
@@ -187,6 +204,7 @@ public class Model_ManagedProject {
 				String scope = (actual.length==2)?actual[1]:null;
 				if(this.mc.getBuildVersions().get(actual[0])==null){
 					ret.append("project <" + this.pmId + "> uses unkown dependency <" + dep + "> - check project's '" + ProjectProperties.PM_DEPENDENCIES.getPropName() + "'");
+					ret.appendNewLine();
 				}
 				else{
 					Model_Dependency md = new Model_Dependency(this.mc.getBuildVersions().get(actual[0]), scope);
@@ -343,6 +361,14 @@ public class Model_ManagedProject {
 	 */
 	public Set<File> getPlugins(){
 		return this.plugins;
+	}
+
+	/**
+	 * Returns the validated profile files of the project.
+	 * @return validated profile files
+	 */
+	public Set<File> getProfiles(){
+		return this.profiles;
 	}
 
 	/**

@@ -20,7 +20,7 @@
  * @author     Sven van der Meer <vdmeer.sven@mykolab.com>
  * @copyright  2016 Sven van der Meer
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License, Version 2.0
- * @version    v0.0.1 build 160301 (01-Mar-16)
+ * @version    v0.0.2-SNAPSHOT build 160304 (04-Mar-16)
  */
 
 delimiters "$", "$"
@@ -81,7 +81,7 @@ $if(mp.mvnEncoding)$
         <encoding>$mp.mvnEncoding$</encoding>
         <file.encoding>$mp.mvnEncoding$</file.encoding>
 $endif$
-        </properties>
+    </properties>
 
 $if(mp.mvnOrgName&&mp.mvnOrgUrl)$
     <!--
@@ -154,7 +154,6 @@ $if(profiles)$
         $profiles:{p|$p$};separator="\n\n"$
     </profiles>
 $endif$
-</project>
 
 $if(reporting)$
     <reporting>
@@ -188,6 +187,8 @@ $endif$
 <pluginRepositories>...</pluginRepositories>
 <distributionManagement>...</distributionManagement>
 -->
+
+</project>
 
 >>
 

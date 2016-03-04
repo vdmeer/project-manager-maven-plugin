@@ -35,7 +35,7 @@ import de.vandermeer.skb.mvn.ProjectFiles;
  * Writes POM files to target directory and copies to project folder if POM there differs.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.1 build 160301 (01-Mar-16) for Java 1.8
+ * @version    v0.0.2-SNAPSHOT build 160304 (04-Mar-16) for Java 1.8
  * @since      v0.0.1
  */
 public class PomWriter {
@@ -67,49 +67,23 @@ public class PomWriter {
 			ST pom = stg.getInstanceOf("pom");
 			pom.add("mp", mp);
 			if(mp.doesBundleDocs()){
-				try{
-					pom.add("plugins", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/" + PmConstants.BUNDLEDOC_PLUGIN_FILE), "UTF-8").useDelimiter("\\A").next());
-					pom.add("plugins", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/" + PmConstants.BUNDLEDOC_RESOURCE_FILE), "UTF-8").useDelimiter("\\A").next());
-				}
-				catch(Exception ignore){
-					ignore.printStackTrace();
-				}
+					pom.add("profiles", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/" + PmConstants.BUNDLEDOC_PROFILE_FILE), "UTF-8").useDelimiter("\\A").next());
 			}
 			if(mp.wantsJarPLugin()){
-				try{
 					pom.add("plugins", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/" + PmConstants.JAR_PLUGIN_FILE), "UTF-8").useDelimiter("\\A").next());
-				}
-				catch(Exception ignore){
-					ignore.printStackTrace();
-				}
 			}
 			if(mp.wantsSourcePlugin()){
-				try{
-					pom.add("plugins", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/" + PmConstants.SOURCE_PLUGIN_FILE), "UTF-8").useDelimiter("\\A").next());
-				}
-				catch(Exception ignore){
-					ignore.printStackTrace();
-				}
+					pom.add("profiles", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/" + PmConstants.SRC_JAR_PROFILE_FILE), "UTF-8").useDelimiter("\\A").next());
 			}
 			if(mp.wantsCompilerPlugin()){
-				try{
 					pom.add("plugins", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/" + PmConstants.COMPILER_PLUGIN_FILE), "UTF-8").useDelimiter("\\A").next());
-				}
-				catch(Exception ignore){
-					ignore.printStackTrace();
-				}
 			}
 			if(mp.wantsJavadocPlugin()){
-				pom.add("plugins", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/" + PmConstants.JAVADOC_PLUGIN_FILE), "UTF-8").useDelimiter("\\A").next());
+				pom.add("profiles", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/" + PmConstants.JAVADOC_JAR_PROFILE_FILE), "UTF-8").useDelimiter("\\A").next());
 			}
 			if(mp.getLicenses().size()>0){
 				for(Licenses l : mp.getLicenses()){
-					try{
 						pom.add("licenses", new Scanner(PomWriter.class.getResourceAsStream("/de/vandermeer/skb/mvn/pm/licenses/" + l.getFileName()), "UTF-8").useDelimiter("\\A").next());
-					}
-					catch(Exception ignore){
-						ignore.printStackTrace();
-					}
 				}
 			}
 			for(Entry<ProjectFiles, File> pf : mp.getOtherProjectFiles().entrySet()){
@@ -123,6 +97,14 @@ public class PomWriter {
 			for(File f : mp.getPlugins()){
 				try{
 					pom.add("plugins", new Scanner(f, "UTF-8").useDelimiter("\\A").next());
+				}
+				catch(Exception ignore){
+					ignore.printStackTrace();
+				}
+			}
+			for(File f : mp.getProfiles()){
+				try{
+					pom.add("profiles", new Scanner(f, "UTF-8").useDelimiter("\\A").next());
 				}
 				catch(Exception ignore){
 					ignore.printStackTrace();

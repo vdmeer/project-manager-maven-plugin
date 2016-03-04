@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>v0.0.1 - initial release - 2016--</title>
+<title>v0.0.2 - initial release - 2016--</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -422,13 +422,66 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_v0_0_1_initial_release_2016_mark_mark">v0.0.1 - initial release - 2016-<mark>-</mark></a></li>
+<li><a href="#_v0_0_2_initial_release_2016_mark_mark">v0.0.2 - initial release - 2016-<mark>-</mark></a></li>
+<li><a href="#_v0_0_1_initial_release_2016_03_01">v0.0.1 - initial release - 2016-03-01</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_v0_0_1_initial_release_2016_mark_mark">v0.0.1 - initial release - 2016-<mark>-</mark></h2>
+<h2 id="_v0_0_2_initial_release_2016_mark_mark">v0.0.2 - initial release - 2016-<mark>-</mark></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>fixed error in pom.stg, now all definitions are in the project</p>
+</li>
+<li>
+<p>add pm.profiles property</p>
+</li>
+<li>
+<p>moved the auto-includes for bundle-doc, source jar, and javadoc jar into profiles</p>
+<div class="ulist">
+<ul>
+<li>
+<p>both bundle doc plugins are in the profile env-bundledoc</p>
+<div class="ulist">
+<ul>
+<li>
+<p>call mvn -Penv-bundledoc</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>source jar in profile env-srcjar</p>
+<div class="ulist">
+<ul>
+<li>
+<p>call mvn -Penv-srcjar</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>javadoc jar in the profile env-jdjar</p>
+<div class="ulist">
+<ul>
+<li>
+<p>call mvn -Penv-jdjar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_v0_0_1_initial_release_2016_03_01">v0.0.1 - initial release - 2016-03-01</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -442,7 +495,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-03-01 01:11:16 GMT
+Last updated 2016-03-03 08:51:54 GMT
 </div>
 </div>
 </body>

@@ -1,5 +1,17 @@
+v0.0.2 - feature add - 2016-03-04
+-------------------------------------
+* fixed error in pom.stg, now all definitions are in the project
+* add +pm.profiles+ property
+* moved the auto-includes for bundle-doc, source jar, and javadoc jar into profiles
+  ** both bundle doc plugins are in the profile +env-bundledoc+
+     *** call +mvn -Penv-bundledoc+
+  ** source jar in profile +env-srcjar+
+     *** call +mvn -Penv-srcjar+
+  ** javadoc jar in the profile +env-jdjar+
+     *** call +mvn -Penv-jdjar+
 
-v0.0.1 - initial release - 2016-##-##
+
+v0.0.1 - initial release - 2016-03-01
 -------------------------------------
 * initial release based on older versions using shell scripts (they are in the GitHub repo in src/main/bash)
 

@@ -23,7 +23,7 @@ import java.util.Set;
  * Collection of all project properties.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.1 build 160301 (01-Mar-16) for Java 1.8
+ * @version    v0.0.2-SNAPSHOT build 160304 (04-Mar-16) for Java 1.8
  * @since      v0.0.1
  */
 public enum ProjectProperties {
@@ -46,6 +46,9 @@ public enum ProjectProperties {
 
 	/** List of files with plugin definitions, path relative from the main project property file. */
 	PM_PLUGINS("pm.plugins", false, "list of files with plugin definitions, path relative from the main project property file"),
+
+	/** List of files with profile definitions, path relative from the main project property file. */
+	PM_PROFILES("pm.profiles", false, "list of files with profiles definitions, path relative from the main project property file"),
 
 	/** Flag for adding a jar plugin. */
 	PM_USE_JAR_PLUGIN("pm.use.jar-plugin", false, "flag for adding a jar plugin"),

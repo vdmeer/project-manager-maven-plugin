@@ -19,7 +19,7 @@ package de.vandermeer.skb.mvn;
  * Constant definitions for the plugin, such as standard file names.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.1 build 160301 (01-Mar-16) for Java 1.8
+ * @version    v0.0.2-SNAPSHOT build 160304 (04-Mar-16) for Java 1.8
  * @since      v0.0.1
  */
 public abstract class PmConstants {
@@ -61,14 +61,14 @@ commons-lang3=org.apache.commons commons-lang3 3.4
 	public static final String JAR_PLUGIN_FILE = "plugin-jar.pm";
 
 	/**
-	 * Filename of a file containing plugin definition for a Javadoc plugin.
+	 * Filename of a file containing profile with definition for a Javadoc jar plugin.
 	 */
-	public static final String JAVADOC_PLUGIN_FILE = "plugin-javadoc.pm";
+	public static final String JAVADOC_JAR_PROFILE_FILE = "profile-jdjar.pm";
 
 	/**
-	 * Filename of a file containing plugin definition for a source plugin.
+	 * Filename of a file containing profile with definition for a source jar plugin.
 	 */
-	public static final String SOURCE_PLUGIN_FILE = "plugin-sourcejar.pm";
+	public static final String SRC_JAR_PROFILE_FILE = "profile-srcjar.pm";
 
 	/**
 	 * Filename of a file containing plugin definition for a compiler plugin.
@@ -76,13 +76,8 @@ commons-lang3=org.apache.commons commons-lang3 3.4
 	public static final String COMPILER_PLUGIN_FILE = "plugin-compiler.pm";
 
 	/**
-	 * Filename of a file containing plugin definition for compiling bundle documentation.
+	 * Filename of a file containing profile definition for compiling and copying bundle documentation.
 	 */
-	public static final String BUNDLEDOC_PLUGIN_FILE = "plugin-bundledoc.pm";
-
-	/**
-	 * Filename of a file containing plugin definition for adding bundle documentation to the main jar.
-	 */
-	public static final String BUNDLEDOC_RESOURCE_FILE = "plugin-bundledoc-resource.pm";
+	public static final String BUNDLEDOC_PROFILE_FILE = "profile-bundledoc.pm";
 
 }
