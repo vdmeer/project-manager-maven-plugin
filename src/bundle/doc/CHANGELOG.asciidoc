@@ -1,3 +1,7 @@
+v0.0.3 - ### - 2016-##-##
+-------------------------
+
+
 v0.0.2 - feature add - 2016-03-04
 -------------------------------------
 * fixed error in pom.stg, now all definitions are in the project
