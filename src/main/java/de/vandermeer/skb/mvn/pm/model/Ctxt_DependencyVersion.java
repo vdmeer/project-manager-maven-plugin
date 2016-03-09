@@ -19,13 +19,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 /**
- * Build version object for context, collects all arifacts and their information from the build version file.
+ * Dependency version object for context, collects all artifacts and their information from the dependency version file.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 160304 (04-Mar-16) for Java 1.8
+ * @version    v0.0.2 build 160306 (06-Mar-16) for Java 1.8
  * @since      v0.0.1
  */
-public class Ctxt_BuildVersion {
+public class Ctxt_DependencyVersion {
 
 	/** An identifier for the dependency, as given in the configuration file. */
 	final String id;
@@ -40,13 +40,13 @@ public class Ctxt_BuildVersion {
 	final String version;
 
 	/**
-	 * Creates a new Build Version object for the context.
+	 * Creates a new dependency version object for the context.
 	 * @param id the identifier of the artifact
 	 * @param value the value (group, artifact, version information)
 	 * @throws NullPointerException if any argument was null or resulted in null strings
 	 * @throws IllegalArgumentException if any argument was blank, resulted in blank strings, or was otherwise problematic
 	 */
-	public Ctxt_BuildVersion(String id, String value){
+	public Ctxt_DependencyVersion(String id, String value){
 		Validate.notBlank(id);
 		Validate.notBlank(value);
 

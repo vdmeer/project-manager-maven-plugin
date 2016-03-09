@@ -32,7 +32,7 @@ import de.vandermeer.skb.mvn.pm.model.PomWriter;
  * Manages MVN projects.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 160304 (04-Mar-16) for Java 1.8
+ * @version    v0.0.2 build 160306 (06-Mar-16) for Java 1.8
  * @since      v0.0.1
  */
 public class ProjectManager {
@@ -69,7 +69,8 @@ public class ProjectManager {
 		this.testConfigDir();
 		this.projects = this.loadProjectDirectories();
 		this.mc = new PM_Context(this.projectPmDir);
-		this.loadBuildVersions();
+		this.loadDependencyVersions();
+		this.loadPluginVersions();
 	}
 
 	/**
@@ -112,25 +113,51 @@ public class ProjectManager {
 	}
 
 	/**
-	 * Loads the build version file of the main project.
+	 * Loads the dependency version file of the main project.
 	 * @throws IllegalArgumentException if any load operation failed (for instance file not found, IO error)
 	 */
-	protected void loadBuildVersions(){
-		//if build versions are defined, load them
-		File buildVersionFile = new File(this.configDir.toString() + File.separator + PmConstants.BUILD_VERSIONS_FILE);
+	protected void loadDependencyVersions(){
+		//if dependency versions are defined, load them
+		File dependencyVersionFile = new File(this.configDir.toString() + File.separator + PmConstants.DEPENDENCY_VERSIONS_FILE);
 		try {
-			Properties buildVersions = new Properties();
-//			getLog().info("build versions file: " + buildVersionFile);
-			buildVersions.load(new FileReader(buildVersionFile));
-			if(buildVersions.size()>0){
-				this.mc.setBuildVersions(buildVersions);
+			Properties dependencyVersions = new Properties();
+//			getLog().info("dependency versions file: " + dependencyVersionFile);
+			dependencyVersions.load(new FileReader(dependencyVersionFile));
+			if(dependencyVersions.size()>0){
+				this.mc.setDependencyVersions(dependencyVersions);
 			}
 		}
 		catch (FileNotFoundException e) {
-//			getLog().warn("- cannot do dependency coordination, build-versions file does not exist: <" + buildVersionFile + ">");
+//			getLog().warn("- cannot do dependency coordination, dependency-versions file does not exist: <" + dependencyVersionFile + ">");
 		}
 		catch (IOException ioex) {
-			throw new IllegalArgumentException("could not read existing build-versions file, got IOException <" + ioex.getMessage() + ">");
+			throw new IllegalArgumentException("could not read existing dependency-versions file, got IOException <" + ioex.getMessage() + ">");
+		}
+		catch(Exception ex){
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
+
+	/**
+	 * Loads the plugin version file of the main project.
+	 * @throws IllegalArgumentException if any load operation failed (for instance file not found, IO error)
+	 */
+	protected void loadPluginVersions(){
+		//if plugin versions are defined, load them
+		File pluginVersionFile = new File(this.configDir.toString() + File.separator + PmConstants.PLUGIN_VERSIONS_FILE);
+		try {
+			Properties pluginVersions = new Properties();
+//			getLog().info("plugin versions file: " + pluginVersionFile);
+			pluginVersions.load(new FileReader(pluginVersionFile));
+			if(pluginVersions.size()>0){
+				this.mc.setPluginVersions(pluginVersions);
+			}
+		}
+		catch (FileNotFoundException e) {
+//			getLog().warn("- cannot do plugin coordination, plugin-versions file does not exist: <" + pluginVersionFile + ">");
+		}
+		catch (IOException ioex) {
+			throw new IllegalArgumentException("could not read existing plugin-versions file, got IOException <" + ioex.getMessage() + ">");
 		}
 		catch(Exception ex){
 			throw new IllegalArgumentException(ex.getMessage());

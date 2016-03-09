@@ -21,7 +21,7 @@ import org.apache.commons.lang3.Validate;
  * Dependency object for the model.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 160304 (04-Mar-16) for Java 1.8
+ * @version    v0.0.2 build 160306 (06-Mar-16) for Java 1.8
  * @since      v0.0.1
  */
 public class Model_Dependency {
@@ -45,7 +45,7 @@ public class Model_Dependency {
 	 * @throws NullPointerException if any argument was null or if getters in the argument returned null
 	 * @throws IllegalArgumentException if any argument was blank (except scope, which defaults to (compile) if getters in the argument returned blank
 	 */
-	public Model_Dependency(Ctxt_BuildVersion bv, String scope){
+	public Model_Dependency(Ctxt_DependencyVersion bv, String scope){
 		this(bv.getGroupId(), bv.getArtifactId(), bv.getVersion(), scope);
 	}
 

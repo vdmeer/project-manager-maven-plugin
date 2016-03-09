@@ -15,6 +15,9 @@
 
 package de.vandermeer.skb.mvn.pm.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -27,7 +30,7 @@ import org.apache.commons.lang3.text.StrBuilder;
  * Context for the project model, as in everything it needs to generate and process a model.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 160304 (04-Mar-16) for Java 1.8
+ * @version    v0.0.2 build 160306 (06-Mar-16) for Java 1.8
  * @since      v0.0.1
  */
 public class PM_Context {
@@ -35,8 +38,11 @@ public class PM_Context {
 	/** The directory where the projects store their properties and configurations. */
 	protected final String projectPmDir;
 
-	/** Mapping of identifiers to build versions. */
-	protected final Map<String, Ctxt_BuildVersion> buildVersions;
+	/** Mapping of identifiers to dependency versions. */
+	protected final Map<String, Ctxt_DependencyVersion> dependencyVersions;
+
+	/** Mapping of property key to version for plugin versions. */
+	protected final List<Map<String, String>> pluginVersions;
 
 	/**
 	 * Creates a new project model context.
@@ -48,7 +54,8 @@ public class PM_Context {
 		Validate.notBlank(projectPmDir, "mc: standard project PM directory names as null");
 		this.projectPmDir = projectPmDir;
 
-		this.buildVersions = new TreeMap<>();
+		this.dependencyVersions = new TreeMap<>();
+		this.pluginVersions = new ArrayList<>();
 	}
 
 	/**
@@ -60,31 +67,63 @@ public class PM_Context {
 	}
 
 	/**
-	 * Sets the build version information on the context (creates {@link Ctxt_BuildVersion} objects).
-	 * @param buildVersions the build version properties
+	 * Sets the dependency version information on the context (creates {@link Ctxt_DependencyVersion} objects).
+	 * @param dependencyVersions the dependency version properties
 	 * @throws IllegalArgumentException if any argument was problematic
 	 */
-	public void setBuildVersions(Properties buildVersions){
+	public void setDependencyVersions(Properties dependencyVersions){
 		StrBuilder errors = new StrBuilder();
-		for(Entry<Object, Object> p : buildVersions.entrySet()){
+		for(Entry<Object, Object> p : dependencyVersions.entrySet()){
 			try{
-				Ctxt_BuildVersion bv = new Ctxt_BuildVersion(p.getKey().toString(), p.getValue().toString());
-				this.buildVersions.put(bv.getId(), bv);
+				Ctxt_DependencyVersion bv = new Ctxt_DependencyVersion(p.getKey().toString(), p.getValue().toString());
+				this.dependencyVersions.put(bv.getId(), bv);
 			}
 			catch(Exception ex){
 				errors.append(ex.getMessage()).appendNewLine();
 			}
 		}
 		if(errors.size()>0){
-			throw new IllegalArgumentException("PM Context, problems loading build versions, see below\n" + errors.toString());
+			throw new IllegalArgumentException("PM Context, problems loading dependency versions, see below\n" + errors.toString());
 		}
 	}
 
 	/**
-	 * Returns the build version map of the context.
-	 * @return build version map, empty if none added successfully
+	 * Returns the dependency version map of the context.
+	 * @return dependency version map, empty if none added successfully
 	 */
-	public Map<String, Ctxt_BuildVersion> getBuildVersions(){
-		return this.buildVersions;
+	public Map<String, Ctxt_DependencyVersion> getDependencyVersions(){
+		return this.dependencyVersions;
 	}
+
+	/**
+	 * Sets the plugin version information on the context.
+	 * @param pluginVersions the plugin version properties
+	 * @throws IllegalArgumentException if any argument was problematic
+	 */
+	public void setPluginVersions(Properties pluginVersions){
+		StrBuilder errors = new StrBuilder();
+		for(Entry<Object, Object> p : pluginVersions.entrySet()){
+			try{
+				Map<String, String> version = new HashMap<>();
+				version.put("key", p.getKey().toString());
+				version.put("value", p.getValue().toString());
+				this.pluginVersions.add(version);
+			}
+			catch(Exception ex){
+				errors.append(ex.getMessage()).appendNewLine();
+			}
+		}
+		if(errors.size()>0){
+			throw new IllegalArgumentException("PM Context, problems loading plugin versions, see below\n" + errors.toString());
+		}
+	}
+
+	/**
+	 * Returns the plugin version map of the context.
+	 * @return plugin version map, empty if none added successfully
+	 */
+	public List<Map<String, String>> getPluginVersions(){
+		return this.pluginVersions;
+	}
+
 }

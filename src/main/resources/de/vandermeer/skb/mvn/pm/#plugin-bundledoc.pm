@@ -10,6 +10,7 @@
             <configuration>
                 <sourceDirectory>src/bundle/doc</sourceDirectory>
                 <outputDirectory>./</outputDirectory>
+                <sourceHighlighter>coderay</sourceHighlighter>
                 <backend>html</backend>
                 <attributes>
                     <toc>true</toc>

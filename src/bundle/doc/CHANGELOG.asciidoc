@@ -1,9 +1,20 @@
-v0.0.3 - ### - 2016-##-##
--------------------------
+v0.0.3 - feature add - 2016-##-##
+---------------------------------
+* added maven site standard plugin (with AsciiDoc dependency)
+* refactored some internal names and methods
+* all profiles/plugins now use properties for versions, so they can be set by each project individually
+* added a Javadoc jar profile that uses AsciiDoclet instead of the standard doclet
+  ** new property then for activating it ""
+* renamed a few project properties from plugin to profile (since they are now in profiles)
+  ** pm.use.javadoc-plugin -> pm.use.javadoc-profile
+  ** pm.use.src-plugin -> pm.use.src-profile
+* renamed build-versions to dependency-versions (and refactored all classes, methods, and members)
+* added plugin-versions (standard file, context settings, POM writing as properties)
+* many changes to local POM artifact files for optimization
 
 
 v0.0.2 - feature add - 2016-03-04
--------------------------------------
+---------------------------------
 * fixed error in pom.stg, now all definitions are in the project
 * add +pm.profiles+ property
 * moved the auto-includes for bundle-doc, source jar, and javadoc jar into profiles

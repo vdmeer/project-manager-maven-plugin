@@ -6,7 +6,7 @@
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>1.5.3</version>
+				<version>${pm.version.asciidoctor-maven-plugin}</version>
 				<executions>
 					<execution>
 						<id>bundle-asciidoc</id>
@@ -14,9 +14,11 @@
 						<configuration>
 							<sourceDirectory>src/bundle/doc</sourceDirectory>
 							<outputDirectory>./</outputDirectory>
+							<sourceHighlighter>coderay</sourceHighlighter>
 							<backend>html</backend>
 							<attributes>
 								<toc>true</toc>
+								<baseDir>${project.basedir}/src</baseDir>
 							</attributes>
 						</configuration>
 						<goals>
@@ -29,7 +31,7 @@
 			<!-- Copy Changelog/Readme and then include in jar with License -->
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.4.3</version>
+				<version>${pm.version.maven-resources-plugin}</version>
 				<executions>
 					<execution>
 						<id>copy-bundle-docs</id>
