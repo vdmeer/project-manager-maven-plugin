@@ -1,5 +1,5 @@
 <profile>
-	<id>env-bundledoc</id>
+	<id>env-bdoc</id>
 	<build>
 		<plugins>
 			<!-- Create HTML versions of Changelog/Readme -->

@@ -11,6 +11,7 @@ v0.0.3 - feature add - 2016-##-##
 * renamed build-versions to dependency-versions (and refactored all classes, methods, and members)
 * added plugin-versions (standard file, context settings, POM writing as properties)
 * many changes to local POM artifact files for optimization
+* removed aggregate from profile-jdjar-adoc
 
 
 v0.0.2 - feature add - 2016-03-04

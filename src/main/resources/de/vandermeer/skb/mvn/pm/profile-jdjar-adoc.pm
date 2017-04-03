@@ -13,7 +13,6 @@
 							<goal>jar</goal>
 						</goals>
 						<configuration>
-
 							<source>${maven.compiler.target}</source>
 							<doclet>org.asciidoctor.Asciidoclet</doclet>
 							<docletArtifact>
@@ -26,9 +25,8 @@
 								--base-dir ${project.basedir}/src
 								--attribute "name=${project.name}"
 								--attribute "release-version=${project.version}"
-								--attribute "title-link=http://example.com[${project.name} ${project.version}]"
+								--attribute "title-link=${mp.project.url}/[${project.name} ${project.version}]"
 							</additionalparam>
-
 							<encoding>${project.resources.sourceEncoding}</encoding>
 							<docencoding>${project.resources.sourceEncoding}</docencoding>
 							<charset>${project.resources.sourceEncoding}</charset>
@@ -49,4 +47,3 @@
 		</plugins>
 	</build>
 </profile>
-

@@ -20,7 +20,7 @@
  * @author     Sven van der Meer <vdmeer.sven@mykolab.com>
  * @copyright  2016 Sven van der Meer
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License, Version 2.0
- * @version    v0.0.2 build 160306 (06-Mar-16)
+ * @version    v0.0.3-SNAPSHOT build 170331 (31-Mar-17)
  */
 
 delimiters "$", "$"
@@ -85,6 +85,7 @@ $if(mp.modelContext.pluginVersions)$
 		$mp.modelContext.pluginVersions:{v|<$v.key$>$v.value$</$v.key$>};separator="\n"$
 $endif$
 		$properties:{v|$v$};separator="\n"$
+		<mp.project.url>$mp.mvnUrl$</mp.project.url>
     </properties>
 
 $if(mp.mvnOrgName&&mp.mvnOrgUrl)$
