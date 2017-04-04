@@ -13,11 +13,24 @@
 							<goal>jar</goal>
 						</goals>
 						<configuration>
+							<source>${maven.compiler.target}</source>
+							<doclet>org.asciidoctor.Asciidoclet</doclet>
+							<docletArtifact>
+								<groupId>org.asciidoctor</groupId>
+								<artifactId>asciidoclet</artifactId>
+								<version>${pm.version.asciidoctor.asciidoclet}</version>
+							</docletArtifact>
+							<overview>src/main/asciidoc/overview.adoc</overview>
+							<additionalparam>
+								--base-dir ${project.basedir}/src
+								--attribute "name=${project.name}"
+								--attribute "release-version=${project.version}"
+								--attribute "title-link=${mp.project.url}/[${project.name} ${project.version}]"
+							</additionalparam>
 							<encoding>${project.resources.sourceEncoding}</encoding>
 							<docencoding>${project.resources.sourceEncoding}</docencoding>
 							<charset>${project.resources.sourceEncoding}</charset>
 							<aggregate>true</aggregate>
-							<overview>${basedir}/src/main/javadoc/overview.html</overview>
 							<nohelp>true</nohelp>
 							<header>${project.name}: ${project.version}</header>
 							<footer>${project.name}: ${project.version}</footer>

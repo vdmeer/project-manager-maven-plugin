@@ -1,6 +1,6 @@
 <plugin>
     <artifactId>maven-compiler-plugin</artifactId>
-    <version>3.2</version>
+    <version>${pm.version.maven-compiler-plugin}</version>
     <configuration>
         <source>${maven.compiler.source}</source>
         <target>${maven.compiler.target}</target>

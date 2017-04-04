@@ -1,0 +1,40 @@
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-site-plugin</artifactId>
+	<version>${pm.version.maven-site-plugin}</version>
+
+	<configuration>
+		<asciidoc>
+<!--
+			<templateDirs>
+				<dir>src/site/asciidoc/templates</dir>
+			</templateDirs>
+			<requires>
+				<require>asciidoctor-diagram</require>
+			</requires>
+-->
+			<attributes>
+				<source-highlighter>coderay</source-highlighter>
+				<coderay-css>style</coderay-css>
+				<release-version>${project.version}</release-version>
+				<basedir>${project.basedir}/src</basedir>
+			</attributes>
+		</asciidoc>
+		<moduleExcludes>
+			<asciidoc>**/_*.adoc</asciidoc>
+		</moduleExcludes>
+	</configuration>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-site-renderer</artifactId>
+			<version>${pm.version.doxia-site-renderer}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.asciidoctor</groupId>
+			<artifactId>asciidoctor-maven-plugin</artifactId>
+			<version>${pm.version.asciidoctor-maven-plugin}</version>
+		</dependency>
+	</dependencies>
+</plugin>

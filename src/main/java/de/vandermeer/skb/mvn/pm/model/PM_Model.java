@@ -31,7 +31,7 @@ import org.apache.commons.lang3.tuple.Pair;
  * Model of projects, with their settings and configurations.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 160304 (04-Mar-16) for Java 1.8
+ * @version    v0.0.3-SNAPSHOT build 170404 (04-Apr-17) for Java 1.8
  * @since      v0.0.1
  */
 public class PM_Model {

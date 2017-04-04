@@ -1,7 +1,7 @@
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-jar-plugin</artifactId>
-    <version>2.6</version>
+    <version>${pm.version.maven-jar-plugin}</version>
     <configuration>
         <excludes>
             <exclude>**/doc-files/</exclude>

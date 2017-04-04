@@ -1,7 +1,7 @@
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-source-plugin</artifactId>
-    <version>2.4</version>
+    <version>${pm.version.maven-source-plugin}</version>
     <executions>
         <execution>
             <id>attach-sources</id>

@@ -1,7 +1,7 @@
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-javadoc-plugin</artifactId>
-    <version>2.10.3</version>
+    <version>${pm.version.maven-javadoc-plugin}</version>
     <executions>
         <execution>
             <id>attach-javadocs</id>

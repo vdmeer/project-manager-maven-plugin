@@ -38,7 +38,7 @@ import de.vandermeer.skb.mvn.ProjectProperties;
  * Managed project object for the model.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 160304 (04-Mar-16) for Java 1.8
+ * @version    v0.0.3-SNAPSHOT build 170404 (04-Apr-17) for Java 1.8
  * @since      v0.0.1
  */
 public class Model_ManagedProject {
@@ -60,9 +60,6 @@ public class Model_ManagedProject {
 
 	/** THe project properties as read from the PM configuration file. */
 	protected Properties properties;
-
-//	/** A map view of the properties. */
-//	protected final Map<Object, Object> propertyMap;
 
 	/** Set of dependencies that are defined by the project and for which we have found build version definitions. */
 	protected final Set<Model_Dependency> dependencies;
@@ -101,11 +98,10 @@ public class Model_ManagedProject {
 		this.pmDir = pmDir;
 		this.projectPropertyFile = propertyFile;
 
-//		this.propertyMap = new HashMap<>();
 		this.loadProperties();
 		this.pmId = this.properties.getProperty(ProjectProperties.PM_ID.getPropName());
 
-		this.mc.getBuildVersions().put(this.getPmId(), new Ctxt_BuildVersion(this.pmId, this.getMvnGroupId() + " " + this.getMvnArtifactId() + " " + this.getMvnVersion()));
+		this.mc.getDependencyVersions().put(this.getPmId(), new Ctxt_DependencyVersion(this.pmId, this.getMvnGroupId() + " " + this.getMvnArtifactId() + " " + this.getMvnVersion()));
 
 		this.dependencies = new LinkedHashSet<>();
 		this.licenses = new LinkedHashSet<>();
@@ -178,16 +174,10 @@ public class Model_ManagedProject {
 	 */
 	protected boolean loadProperties() throws FileNotFoundException, IOException{
 		this.properties = new Properties();
-//		this.getModelContext().log.info(this.projectPropertyFile.toString());
 		this.properties.load(new FileReader(this.projectPropertyFile));
 		for(ProjectProperties pp : ProjectProperties.getRequried()){
 			Validate.notBlank(this.properties.getProperty(pp.getPropName()), "<" + this.projectPropertyFile + "> -> required property does not exist or is blank: <" + pp.getPropName() + ">");
 		}
-//		for(Entry<Object, Object> s : this.properties.entrySet()){
-//			if(s.getKey()!=null && s.getValue()!=null){
-//				this.propertyMap.put(s.getKey(), s.getValue());
-//			}
-//		}
 		return true;
 	}
 
@@ -202,12 +192,12 @@ public class Model_ManagedProject {
 			for(String dep : StringUtils.split(deps)){
 				String[] actual = StringUtils.split(dep, "/");
 				String scope = (actual.length==2)?actual[1]:null;
-				if(this.mc.getBuildVersions().get(actual[0])==null){
+				if(this.mc.getDependencyVersions().get(actual[0])==null){
 					ret.append("project <" + this.pmId + "> uses unkown dependency <" + dep + "> - check project's '" + ProjectProperties.PM_DEPENDENCIES.getPropName() + "'");
 					ret.appendNewLine();
 				}
 				else{
-					Model_Dependency md = new Model_Dependency(this.mc.getBuildVersions().get(actual[0]), scope);
+					Model_Dependency md = new Model_Dependency(this.mc.getDependencyVersions().get(actual[0]), scope);
 					this.dependencies.add(md);
 				}
 			}
@@ -311,8 +301,20 @@ public class Model_ManagedProject {
 		return this.properties.getProperty(ProjectProperties.MVN_ORGANIZATION_URL.getPropName());
 	}
 
+	/**
+	 * Returns the bundle doc flag.
+	 * @return true if the project wants to use bundle-doc profile, false otherwise
+	 */
 	public boolean doesBundleDocs(){
 		return (this.properties.getProperty(ProjectProperties.PM_DO_BUNDLE_DOC.getPropName())!=null)?true:false;
+	}
+
+	/**
+	 * Returns the maven site flag.
+	 * @return true if the project wants to use the standard maven site plugin, false otherwise
+	 */
+	public boolean wantsSitePlugin(){
+		return (this.properties.getProperty(ProjectProperties.PM_USE_MAVEN_SITE_PLUGIN.getPropName())!=null)?true:false;
 	}
 
 	/**
@@ -420,11 +422,11 @@ public class Model_ManagedProject {
 	}
 
 	/**
-	 * Flag for requiring the source plugin.
+	 * Flag for requiring the source profile.
 	 * @return true if required, false otherwise
 	 */
-	public boolean wantsSourcePlugin(){
-		return (this.properties.getProperty(ProjectProperties.PM_USE_SRC_PLUGIN.getPropName())!=null)?true:false;
+	public boolean wantsSourceProfile(){
+		return (this.properties.getProperty(ProjectProperties.PM_USE_SRC_PROFILE.getPropName())!=null)?true:false;
 	}
 
 	/**
@@ -436,10 +438,18 @@ public class Model_ManagedProject {
 	}
 
 	/**
-	 * Flag for requiring the Javadoc plugin.
+	 * Flag for requiring the Javadoc profile.
 	 * @return true if required, false otherwise
 	 */
-	public boolean wantsJavadocPlugin(){
-		return (this.properties.getProperty(ProjectProperties.PM_USE_JAVADOC_PLUGIN.getPropName())!=null)?true:false;
+	public boolean wantsJavadocProfile(){
+		return (this.properties.getProperty(ProjectProperties.PM_USE_JAVADOC_PROFILE.getPropName())!=null)?true:false;
+	}
+
+	/**
+	 * Flag for requiring the Javadoc profile ith AsciiDoc doclet.
+	 * @return true if required, false otherwise
+	 */
+	public boolean wantsJavadocAdocProfile(){
+		return (this.properties.getProperty(ProjectProperties.PM_USE_JAVADOC_ADOC_PROFILE.getPropName())!=null)?true:false;
 	}
 }

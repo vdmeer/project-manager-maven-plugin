@@ -20,13 +20,13 @@
  * @author     Sven van der Meer <vdmeer.sven@mykolab.com>
  * @copyright  2016 Sven van der Meer
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License, Version 2.0
- * @version    v0.0.2 build 160304 (04-Mar-16)
+ * @version    v0.0.3-SNAPSHOT build 170404 (04-Apr-17)
  */
 
 delimiters "$", "$"
 
 
-pom(mp, licenses, plugins, dependencies, developers, contributors, distMgmt, modules, reporting, profiles) ::= <<
+pom(mp, licenses, properties, plugins, dependencies, developers, contributors, distMgmt, modules, reporting, profiles) ::= <<
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -81,6 +81,11 @@ $if(mp.mvnEncoding)$
         <encoding>$mp.mvnEncoding$</encoding>
         <file.encoding>$mp.mvnEncoding$</file.encoding>
 $endif$
+$if(mp.modelContext.pluginVersions)$
+		$mp.modelContext.pluginVersions:{v|<$v.key$>$v.value$</$v.key$>};separator="\n"$
+$endif$
+		$properties:{v|$v$};separator="\n"$
+		<mp.project.url>$mp.mvnUrl$</mp.project.url>
     </properties>
 
 $if(mp.mvnOrgName&&mp.mvnOrgUrl)$

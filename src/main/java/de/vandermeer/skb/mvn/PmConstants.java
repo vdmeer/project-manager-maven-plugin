@@ -19,7 +19,7 @@ package de.vandermeer.skb.mvn;
  * Constant definitions for the plugin, such as standard file names.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 160304 (04-Mar-16) for Java 1.8
+ * @version    v0.0.3-SNAPSHOT build 170404 (04-Apr-17) for Java 1.8
  * @since      v0.0.1
  */
 public abstract class PmConstants {
@@ -47,7 +47,16 @@ public abstract class PmConstants {
 commons-lang3=org.apache.commons commons-lang3 3.4
 	 * </pre>
 	 */
-	public static final String BUILD_VERSIONS_FILE = "build-versions.pm";
+	public static final String DEPENDENCY_VERSIONS_FILE = "dependency-versions.pm";
+
+	/**
+	 * The file that provides version information used in plugins.
+	 * The file is essentially a Java property file.
+	 * The key is the Maven property used in the plugin definition.
+	 * The value is the version.
+	 * Dependencies that are defined within a plugin definition should be in here.
+	 */
+	public static final String PLUGIN_VERSIONS_FILE = "plugin-versions.pm";
 
 	/**
 	 * Standard path to project specific PM property and configuration files.
@@ -61,12 +70,17 @@ commons-lang3=org.apache.commons commons-lang3 3.4
 	public static final String JAR_PLUGIN_FILE = "plugin-jar.pm";
 
 	/**
-	 * Filename of a file containing profile with definition for a Javadoc jar plugin.
+	 * Filename of a file containing profile with definition for a Javadoc jar profile.
 	 */
 	public static final String JAVADOC_JAR_PROFILE_FILE = "profile-jdjar.pm";
 
 	/**
-	 * Filename of a file containing profile with definition for a source jar plugin.
+	 * Filename of a file containing profile with definition for a Javadoc jar profile using an AsciiDoctor doclet.
+	 */
+	public static final String JAVADOC_ADOC_JAR_PROFILE_FILE = "profile-jdjar-adoc.pm";
+
+	/**
+	 * Filename of a file containing profile with definition for a source jar profile.
 	 */
 	public static final String SRC_JAR_PROFILE_FILE = "profile-srcjar.pm";
 
@@ -76,8 +90,12 @@ commons-lang3=org.apache.commons commons-lang3 3.4
 	public static final String COMPILER_PLUGIN_FILE = "plugin-compiler.pm";
 
 	/**
-	 * Filename of a file containing profile definition for compiling and copying bundle documentation.
+	 * Filename of a file containing profile definition for compiling and copying bundle documentation (as profile).
 	 */
 	public static final String BUNDLEDOC_PROFILE_FILE = "profile-bundledoc.pm";
 
+	/**
+	 * Filename of a file containing plugin definition for the maven site plugin.
+	 */
+	public static final String SITE_PLUGIN_FILE = "plugin-site.pm";
 }

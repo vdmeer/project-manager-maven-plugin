@@ -23,7 +23,7 @@ import java.util.Set;
  * Collection of all project properties.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 160304 (04-Mar-16) for Java 1.8
+ * @version    v0.0.3-SNAPSHOT build 170404 (04-Apr-17) for Java 1.8
  * @since      v0.0.1
  */
 public enum ProjectProperties {
@@ -38,29 +38,35 @@ public enum ProjectProperties {
 	/** Dependencies (of project managed by the pm) as a list of - name of the project with an optional scope separated by a slash. */
 	PM_DEPENDENCIES ("pm.dependencies", false, "dependencies (of project managed by the pm) as a list of - name of the project with an optional scope separated by a slash"),
 
-	/** Flag for adding an ASCIIDOC plugin to compile bundle documentation. */
-	PM_DO_BUNDLE_DOC("pm.do.bundle-doc", false, "flag for adding an ASCIIDOC plugin to compile bundle documentation"),
+	/** Flag for adding an ASCIIDOC profile to compile bundle documentation. */
+	PM_DO_BUNDLE_DOC ("pm.do.bundle-doc", false, "flag for adding an ASCIIDOC profile to compile bundle documentation"),
 
 	/** Licenses for the project, keys (separated by whitespace) will be translated to license definitions in the project manager. */
-	PM_LICENSES("pm.licenses", true, "licenses for the project, keys will be translated to license definitions in the project manager"),
+	PM_LICENSES ("pm.licenses", true, "licenses for the project, keys will be translated to license definitions in the project manager"),
 
 	/** List of files with plugin definitions, path relative from the main project property file. */
-	PM_PLUGINS("pm.plugins", false, "list of files with plugin definitions, path relative from the main project property file"),
+	PM_PLUGINS ("pm.plugins", false, "list of files with plugin definitions, path relative from the main project property file"),
 
 	/** List of files with profile definitions, path relative from the main project property file. */
-	PM_PROFILES("pm.profiles", false, "list of files with profiles definitions, path relative from the main project property file"),
+	PM_PROFILES ("pm.profiles", false, "list of files with profiles definitions, path relative from the main project property file"),
 
 	/** Flag for adding a jar plugin. */
-	PM_USE_JAR_PLUGIN("pm.use.jar-plugin", false, "flag for adding a jar plugin"),
+	PM_USE_JAR_PLUGIN ("pm.use.jar-plugin", false, "flag for adding a jar plugin"),
 
-	/** Flag for adding a source plugin. */
-	PM_USE_SRC_PLUGIN("pm.use.src-plugin", false, "flag for adding a source plugin"),
+	/** Flag for adding a source profile. */
+	PM_USE_SRC_PROFILE ("pm.use.src-profile", false, "flag for adding a source profile"),
 
 	/** Flag for adding a compiler plugin. */
-	PM_USE_COMPILER_PLUGIN("pm.use.compiler-plugin", false, "flag for adding a compiler plugin"),
+	PM_USE_COMPILER_PLUGIN ("pm.use.compiler-plugin", false, "flag for adding a compiler plugin"),
 
-	/** Flag for adding a Javadoc plugin. */
-	PM_USE_JAVADOC_PLUGIN("pm.use.javadoc-plugin", false, "flag for adding a Javadoc plugin"),
+	/** Flag for adding a Javadoc profile. */
+	PM_USE_JAVADOC_PROFILE ("pm.use.javadoc-profile", false, "flag for adding a Javadoc profile"),
+
+	/** Flag for adding a Javadoc profile with AsciiDoc doclet. */
+	PM_USE_JAVADOC_ADOC_PROFILE ("pm.use.javadoc-adoc-profile", false, "flag for adding a Javadoc profile with AsciiDoc doclet"),
+
+	/** Flag for adding a maven site plugin. */
+	PM_USE_MAVEN_SITE_PLUGIN ("pm.use.maven-site-plugin", false, "flag for adding a maven site plugin"),
 
 	//
 	// MAVEN BASIC INFORMATION

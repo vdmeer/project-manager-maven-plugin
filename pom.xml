@@ -14,7 +14,7 @@
       -->
     <groupId>de.vandermeer</groupId>
     <artifactId>project-manager-maven-plugin</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <packaging>maven-plugin</packaging>
 
     <!--
@@ -54,6 +54,16 @@
         <project.resources.sourceEncoding>UTF-8</project.resources.sourceEncoding>
         <encoding>UTF-8</encoding>
         <file.encoding>UTF-8</file.encoding>
+		<pm.version.maven-jar-plugin>2.6</pm.version.maven-jar-plugin>
+		<pm.version.maven-site-plugin>3.5</pm.version.maven-site-plugin>
+		<pm.version.maven-source-plugin>2.4</pm.version.maven-source-plugin>
+		<pm.version.asciidoctor.asciidoclet>1.5.4</pm.version.asciidoctor.asciidoclet>
+		<pm.version.maven-compiler-plugin>3.2</pm.version.maven-compiler-plugin>
+		<pm.version.asciidoctor-maven-plugin>1.5.3</pm.version.asciidoctor-maven-plugin>
+		<pm.version.maven-javadoc-plugin>2.10.3</pm.version.maven-javadoc-plugin>
+		<pm.version.doxia-site-renderer>1.7</pm.version.doxia-site-renderer>
+		<pm.version.maven-resources-plugin>2.4.3</pm.version.maven-resources-plugin>
+		<mp.project.url>https://github.com/vdmeer/project-manager-maven-plugin</mp.project.url>
     </properties>
 
     <!--
@@ -140,7 +150,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.6</version>
+                <version>${pm.version.maven-jar-plugin}</version>
                 <configuration>
                     <excludes>
                         <exclude>**/doc-files/</exclude>
@@ -181,14 +191,14 @@
       -->
     <profiles>
         <profile>
-        	<id>env-bundledoc</id>
+        	<id>env-bdoc</id>
         	<build>
         		<plugins>
         			<!-- Create HTML versions of Changelog/Readme -->
         			<plugin>
         				<groupId>org.asciidoctor</groupId>
         				<artifactId>asciidoctor-maven-plugin</artifactId>
-        				<version>1.5.3</version>
+        				<version>${pm.version.asciidoctor-maven-plugin}</version>
         				<executions>
         					<execution>
         						<id>bundle-asciidoc</id>
@@ -196,9 +206,11 @@
         						<configuration>
         							<sourceDirectory>src/bundle/doc</sourceDirectory>
         							<outputDirectory>./</outputDirectory>
+        							<sourceHighlighter>coderay</sourceHighlighter>
         							<backend>html</backend>
         							<attributes>
         								<toc>true</toc>
+        								<baseDir>${project.basedir}/src</baseDir>
         							</attributes>
         						</configuration>
         						<goals>
@@ -211,7 +223,7 @@
         			<!-- Copy Changelog/Readme and then include in jar with License -->
         			<plugin>
         				<artifactId>maven-resources-plugin</artifactId>
-        				<version>2.4.3</version>
+        				<version>${pm.version.maven-resources-plugin}</version>
         				<executions>
         					<execution>
         						<id>copy-bundle-docs</id>
@@ -258,7 +270,7 @@
         			<plugin>
         				<groupId>org.apache.maven.plugins</groupId>
         				<artifactId>maven-source-plugin</artifactId>
-        				<version>2.4</version>
+        				<version>${pm.version.maven-source-plugin}</version>
         				<executions>
         					<execution>
         						<id>attach-sources</id>
@@ -279,7 +291,7 @@
         			<plugin>
         				<groupId>org.apache.maven.plugins</groupId>
         				<artifactId>maven-javadoc-plugin</artifactId>
-        				<version>2.10.3</version>
+        				<version>${pm.version.maven-javadoc-plugin}</version>
         				<executions>
         					<execution>
         						<id>attach-javadocs</id>
