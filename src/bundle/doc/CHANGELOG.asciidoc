@@ -1,4 +1,4 @@
-v0.0.3 - feature add - 2016-##-##
+v0.0.3 - feature add - 2017-04-04
 ---------------------------------
 * added maven site standard plugin (with AsciiDoc dependency)
 * refactored some internal names and methods
