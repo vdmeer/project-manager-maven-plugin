@@ -119,7 +119,7 @@ public class PomWriter {
 
 			File out = new File(gpf + File.separator + mp.getPmId() + ".pom");
 			try{
-				FileUtils.write(out, pom.render(), false);
+				FileUtils.write(out, pom.render(), (String)null, false);
 			}
 			catch(Exception ignore){
 				ignore.printStackTrace();

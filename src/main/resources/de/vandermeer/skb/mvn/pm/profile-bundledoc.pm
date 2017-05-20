@@ -12,13 +12,13 @@
 						<id>bundle-asciidoc</id>
 						<phase>process-resources</phase>
 						<configuration>
-							<sourceDirectory>src/bundle/doc</sourceDirectory>
-							<outputDirectory>./</outputDirectory>
+							<sourceDirectory>${project.basedir}/target/bundle/doc</sourceDirectory>
+							<outputDirectory>${project.basedir}</outputDirectory>
 							<sourceHighlighter>coderay</sourceHighlighter>
 							<backend>html</backend>
 							<attributes>
 								<toc>true</toc>
-								<baseDir>${project.basedir}/src</baseDir>
+								<baseDir>${project.basedir}/target/bundle/doc</baseDir>
 							</attributes>
 						</configuration>
 						<goals>
@@ -38,15 +38,20 @@
 						<phase>generate-resources</phase>
 						<goals><goal>copy-resources</goal></goals>
 						<configuration>
-							<outputDirectory>./</outputDirectory>
+							<outputDirectory>${project.basedir}/target/bundle/doc</outputDirectory>
 							<resources>
 								<resource>
-									<directory>src/bundle/doc</directory>
+									<directory>${project.basedir}</directory>
 									<filtering>true</filtering>
+									<includes>
+										<include>*.adoc</include>
+										<include>*.asciidoc</include>
+									</includes>
 								</resource>
 							</resources>
 						</configuration>
 					</execution>
+<!--
 					<execution>
 						<id>copy-to-jar</id>
 						<phase>prepare-package</phase>
@@ -58,13 +63,14 @@
 									<directory>${basedir}</directory>
 									<includes>
 										<include>LICENSE</include>
-										<include>CHANGELOG*</include>
-										<include>README*</include>
+										<include>CHANGELOG.*</include>
+										<include>README.*</include>
 									</includes>
 								</resource>
 							</resources>
 						</configuration>
 					</execution>
+-->
 				</executions>
 			</plugin>
 		</plugins>
